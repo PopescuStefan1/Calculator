@@ -17,7 +17,11 @@ const clearButton = document.querySelector('.clearButton');
 clearButton.addEventListener('click', function () { clear() })
 
 const deleteButton = document.querySelector('.deleteButton');
-deleteButton.addEventListener('click', function () { screen.textContent = screen.textContent.slice(0, -1); })
+deleteButton.addEventListener('click', function () { deleteOne() })
+
+function deleteOne() {
+    screen.textContent = screen.textContent.slice(0, -1);
+}
 
 function clear() {
     history.textContent = '';
@@ -31,13 +35,15 @@ function showOnScreen(text) {
     // Clears values and screen when pressing a new digit after solving the previous operation
     if (history.textContent.includes('=')) { clear(); }
 
-    if (!(screen.textContent.includes('.') && text === '.')) { screen.textContent += text; }
+    if (!(screen.textContent.includes('.') && text === '.') && screen.textContent.length < 15) { screen.textContent += text; }
 }
 
 function operatorPress(button) {
     if (history.textContent !== '' && !(history.textContent.includes('='))) { solve(); }
 
-    op = button.textContent;
+    if (typeof button === 'string') { op = button; }
+    else { op = button.textContent; }
+
     if (screen.textContent === '') { a = 0 }
     else { a = Number(screen.textContent); }
 
@@ -57,6 +63,19 @@ function solve() {
     } else {
         let result = operate(op, a, b);
         result = Math.round((result + Number.EPSILON) * 1000000) / 1000000;
+
+        // If result is too large cut from the precision
+        if (result.toString().length > 15) {
+            result = result.toExponential();
+        }
+        if (result.toString().includes('e')) {
+            let string = result.toString();
+            const end = string.indexOf('e');
+            const remove = string.slice(7, end - 1);
+            string = string.replace(remove, '');
+            result = Number(string);
+            result = result.toExponential();
+        }
 
         if (result === null) {
             screen.textContent = 'Cannot divide by 0'
@@ -91,3 +110,47 @@ function divide(a, b) {
     if (b === 0) { return null; }
     return (a / b);
 }
+
+window.addEventListener("keydown", (event) => {
+    if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+    }
+
+    switch (event.key) {
+        case "0":
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+        case ".":
+            showOnScreen(event.key);
+            break;
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+            operatorPress(event.key);
+            break;
+        case "Enter":
+        case "=":
+            solve();
+            break;
+        case "Esc": // IE/Edge specific value
+        case "Escape":
+            clear();
+            break;
+        case "Backspace":
+            deleteOne();
+            break;
+        default:
+            return; // Quit when this doesn't handle the key event.
+    }
+
+    // Cancel the default action to avoid it being handled twice
+    event.preventDefault();
+}, true);
