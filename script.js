@@ -1,3 +1,15 @@
+const screen = document.querySelector('.currentScreen');
+let a;
+let b;
+let op;
+
+const buttons = document.querySelectorAll('.inputButton');
+buttons.forEach(element => element.addEventListener('click', function () { showOnScreen(element) }));
+
+function showOnScreen(button) {
+    screen.textContent += button.textContent;
+}
+
 function operate(op, a, b) {
     if (op === '+') {
         add(a, b);
