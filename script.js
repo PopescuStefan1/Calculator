@@ -13,14 +13,21 @@ opButtons.forEach(button => button.addEventListener('click', function () { opera
 const equalButton = document.querySelector('.equalsButton');
 equalButton.addEventListener('click', function () { solve() });
 
+const clearButton = document.querySelector('.clearButton');
+clearButton.addEventListener('click', function () { clear() })
+
+function clear() {
+    history.textContent = '';
+    screen.textContent = '';
+    a = null;
+    b = null;
+    op = null;
+}
+
 function showOnScreen(text) {
     // Clears values and screen when pressing a new digit after solving the previous operation
     if (history.textContent.includes('=')) {
-        history.textContent = '';
-        screen.textContent = '';
-        a = null;
-        b = null;
-        op = null;
+        clear();
     }
 
     screen.textContent += text;
