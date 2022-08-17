@@ -10,5 +10,18 @@ body {
     margin-top: 10vh;
     background-color: darkgray;
     height: 600px;
-    width: 400px;
+    width: 450px;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    border: 5px solid black;
+    border-radius: 10%;
+    padding: 32px;
+}
+
+#screen{
+    background-color: white;
+}
+
+#buttons{
+    border: 1px solid black;
 }
