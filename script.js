@@ -10,25 +10,40 @@ numberButtons.forEach(button => button.addEventListener('click', function () { s
 const opButtons = document.querySelectorAll('.operatorButton');
 opButtons.forEach(button => button.addEventListener('click', function () { operatorPress(button) }));
 
+const equalButton = document.querySelector('.equalsButton');
+equalButton.addEventListener('click', function () { solve() });
+
 function showOnScreen(text) {
     screen.textContent += text;
 }
 
 function operatorPress(button) {
     op = button.textContent;
-    a = screen.textContent;
-    history.textContent = `${screen.textContent} ${op}`;
+    a = Number(screen.textContent);
+    history.textContent = `${screen.textContent} ${op} `;
+    screen.textContent = '';
+}
+
+function solve() {
+    if (typeof b === 'undefined') {
+        b = Number(screen.textContent);
+    }
+    const result = operate(op, a, b);
+
+    history.textContent = `${a} ${op} ${b} = `;
+    screen.textContent = `${result}`;
+    a = result;
 }
 
 function operate(op, a, b) {
     if (op === '+') {
-        add(a, b);
+        return add(a, b);
     } else if (op === '-') {
-        subtract(a, b);
+        return subtract(a, b);
     } else if (op === '*') {
-        multiply(a, b);
+        return multiply(a, b);
     } else if (op === '/') {
-        divide(a, b);
+        return divide(a, b);
     }
 }
 
