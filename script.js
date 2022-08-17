@@ -16,6 +16,9 @@ equalButton.addEventListener('click', function () { solve() });
 const clearButton = document.querySelector('.clearButton');
 clearButton.addEventListener('click', function () { clear() })
 
+const deleteButton = document.querySelector('.deleteButton');
+deleteButton.addEventListener('click', function () { screen.textContent = screen.textContent.slice(0, -1); })
+
 function clear() {
     history.textContent = '';
     screen.textContent = '';
