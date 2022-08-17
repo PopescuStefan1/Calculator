@@ -1,8 +1,8 @@
 const screen = document.querySelector('.currentScreenText');
 const history = document.querySelector('.previousScreenText');
-let a;
-let b;
-let op;
+let a = null;
+let b = null;
+let op = null;
 
 const numberButtons = document.querySelectorAll('.inputButton');
 numberButtons.forEach(button => button.addEventListener('click', function () { showOnScreen(button.textContent) }));
@@ -34,7 +34,7 @@ function showOnScreen(text) {
 }
 
 function operatorPress(button) {
-    if (history.textContent !== '') {
+    if (history.textContent !== '' && !(history.textContent.includes('='))) {
         solve();
     }
 
@@ -48,13 +48,22 @@ function solve() {
     if (!history.textContent.includes('=')) {
         b = Number(screen.textContent);
     }
-    const result = operate(op, a, b);
-    if (result === null) {
-        screen.textContent = 'Cannot divide by 0'
+
+    // Check if just a number & equal sign have been inputed
+    if (op === null) {
+        history.textContent = `${b} = `;
+        screen.textContent = `${b}`;
     } else {
-        history.textContent = `${a} ${op} ${b} = `;
-        screen.textContent = `${result}`;
-        a = result;
+        let result = operate(op, a, b);
+        result = Math.round((result + Number.EPSILON) * 1000000) / 1000000;
+
+        if (result === null) {
+            screen.textContent = 'Cannot divide by 0'
+        } else {
+            history.textContent = `${a} ${op} ${b} = `;
+            screen.textContent = `${result}`;
+            a = result;
+        }
     }
 }
 
@@ -86,5 +95,5 @@ function divide(a, b) {
     if (b === 0) {
         return null;
     }
-    return (a / b).toFixed(5);
+    return (a / b);
 }
