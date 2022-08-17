@@ -4,7 +4,7 @@ body {
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    font-size: 16px;
+    font-size: 20px;
     font-family: "Open Sans", sans-serif;
 }
 
@@ -32,17 +32,18 @@ body {
 
 .previousScreen {
     flex: 1;
+    align-items: flex-end;
 }
 
 .currentScreen {
     flex: 2;
     font-size: 48px;
+    align-items: center;
 }
 
 .previousScreen,
 .currentScreen {
     display: flex;
-    align-items: center;
     justify-content: end;
 }
 
