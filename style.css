@@ -1,0 +1,14 @@
+body {
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#calculator {
+    margin-top: 10vh;
+    background-color: darkgray;
+    height: 600px;
+    width: 400px;
+}
