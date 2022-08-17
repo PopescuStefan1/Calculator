@@ -94,3 +94,17 @@ button:active {
         padding: 0.25em 0.75em;
     }
 }
+
+.operatorButton,
+.equalsButton,
+.dotButton {
+    background-color: lightseagreen;
+}
+
+.deleteButton {
+    background-color: palevioletred;
+}
+
+.clearButton {
+    background-color: indianred;
+}

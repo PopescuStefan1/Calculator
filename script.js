@@ -26,24 +26,18 @@ function clear() {
 
 function showOnScreen(text) {
     // Clears values and screen when pressing a new digit after solving the previous operation
-    if (history.textContent.includes('=')) {
-        clear();
-    }
+    if (history.textContent.includes('=')) { clear(); }
 
-    screen.textContent += text;
+    if (!(screen.textContent.includes('.') && text === '.')) { screen.textContent += text; }
 }
 
 function operatorPress(button) {
-    if (history.textContent !== '' && !(history.textContent.includes('='))) {
-        solve();
-    }
+    if (history.textContent !== '' && !(history.textContent.includes('='))) { solve(); }
 
     op = button.textContent;
-    if (screen.textContent === '') {
-        a = 0;
-    } else {
-        a = Number(screen.textContent);
-    }
+    if (screen.textContent === '') { a = 0 }
+    else { a = Number(screen.textContent); }
+
     history.textContent = `${a} ${op} `;
     screen.textContent = '';
 }
@@ -72,15 +66,10 @@ function solve() {
 }
 
 function operate(op, a, b) {
-    if (op === '+') {
-        return add(a, b);
-    } else if (op === '-') {
-        return subtract(a, b);
-    } else if (op === '*') {
-        return multiply(a, b);
-    } else if (op === '/') {
-        return divide(a, b);
-    }
+    if (op === '+') { return add(a, b); }
+    else if (op === '-') { return subtract(a, b); }
+    else if (op === '*') { return multiply(a, b); }
+    else if (op === '/') { return divide(a, b); }
 }
 
 function add(a, b) {
@@ -96,8 +85,6 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === 0) {
-        return null;
-    }
+    if (b === 0) { return null; }
     return (a / b);
 }
