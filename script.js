@@ -1,13 +1,23 @@
 const screen = document.querySelector('.currentScreen');
+const history = document.querySelector('.previousScreen');
 let a;
 let b;
 let op;
 
-const buttons = document.querySelectorAll('.inputButton');
-buttons.forEach(element => element.addEventListener('click', function () { showOnScreen(element) }));
+const numberButtons = document.querySelectorAll('.inputButton');
+numberButtons.forEach(button => button.addEventListener('click', function () { showOnScreen(button.textContent) }));
 
-function showOnScreen(button) {
-    screen.textContent += button.textContent;
+const opButtons = document.querySelectorAll('.operatorButton');
+opButtons.forEach(button => button.addEventListener('click', function () { operatorPress(button) }));
+
+function showOnScreen(text) {
+    screen.textContent += text;
+}
+
+function operatorPress(button) {
+    op = button.textContent;
+    a = screen.textContent;
+    history.textContent = `${screen.textContent} ${op}`;
 }
 
 function operate(op, a, b) {
