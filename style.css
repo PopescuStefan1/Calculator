@@ -4,7 +4,7 @@ body {
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    font-size: 32px;
+    font-size: 16px;
     font-family: "Open Sans", sans-serif;
 }
 
@@ -24,7 +24,6 @@ body {
 #screen {
     background-color: aliceblue;
     border-radius: 10%;
-    text-align: end;
     padding: 4%;
     display: flex;
     flex-direction: column;
@@ -37,7 +36,14 @@ body {
 
 .currentScreen {
     flex: 2;
-    font-size: 56px;
+    font-size: 48px;
+}
+
+.previousScreen,
+.currentScreen {
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 #buttons {

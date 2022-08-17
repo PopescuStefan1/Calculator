@@ -1,5 +1,5 @@
-const screen = document.querySelector('.currentScreen');
-const history = document.querySelector('.previousScreen');
+const screen = document.querySelector('.currentScreenText');
+const history = document.querySelector('.previousScreenText');
 let a;
 let b;
 let op;
@@ -49,10 +49,13 @@ function solve() {
         b = Number(screen.textContent);
     }
     const result = operate(op, a, b);
-
-    history.textContent = `${a} ${op} ${b} = `;
-    screen.textContent = `${result}`;
-    a = result;
+    if (result === null) {
+        screen.textContent = 'Cannot divide by 0'
+    } else {
+        history.textContent = `${a} ${op} ${b} = `;
+        screen.textContent = `${result}`;
+        a = result;
+    }
 }
 
 function operate(op, a, b) {
@@ -83,5 +86,5 @@ function divide(a, b) {
     if (b === 0) {
         return null;
     }
-    return a / b;
+    return (a / b).toFixed(5);
 }
