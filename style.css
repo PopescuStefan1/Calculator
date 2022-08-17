@@ -1,11 +1,13 @@
 body {
     background-color: beige;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     height: 100vh;
     width: 100vw;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
+    margin: 0;
 }
 
 #calculator {
@@ -107,4 +109,12 @@ button:active {
 
 .clearButton {
     background-color: indianred;
+}
+
+footer {
+    width: 100vw;
+    margin-top: auto;
+    padding-bottom: 3%;
+    text-align: center;
+    color: rgb(32, 32, 32);
 }
