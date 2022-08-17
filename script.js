@@ -39,8 +39,12 @@ function operatorPress(button) {
     }
 
     op = button.textContent;
-    a = Number(screen.textContent);
-    history.textContent = `${screen.textContent} ${op} `;
+    if (screen.textContent === '') {
+        a = 0;
+    } else {
+        a = Number(screen.textContent);
+    }
+    history.textContent = `${a} ${op} `;
     screen.textContent = '';
 }
 
