@@ -62,6 +62,11 @@ function solve() {
         screen.textContent = `${b}`;
     } else {
         let result = operate(op, a, b);
+        if (result === null) {
+            screen.textContent = 'Cannot divide by 0';
+            return;
+        }
+
         result = Math.round((result + Number.EPSILON) * 1000000) / 1000000;
 
         // If result is too large cut from the precision
@@ -77,13 +82,11 @@ function solve() {
             result = result.toExponential();
         }
 
-        if (result === null) {
-            screen.textContent = 'Cannot divide by 0'
-        } else {
-            history.textContent = `${a} ${op} ${b} = `;
-            screen.textContent = `${result}`;
-            a = result;
-        }
+        // Update screen and history
+        history.textContent = `${a} ${op} ${b} = `;
+        screen.textContent = `${result}`;
+        a = result;
+
     }
 }
 
