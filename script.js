@@ -20,6 +20,7 @@ const deleteButton = document.querySelector('.deleteButton');
 deleteButton.addEventListener('click', function () { deleteOne() })
 
 function deleteOne() {
+    if (screen.textContent.includes('C')) { clear(); }
     screen.textContent = screen.textContent.slice(0, -1);
 }
 
@@ -33,12 +34,17 @@ function clear() {
 
 function showOnScreen(text) {
     // Clears values and screen when pressing a new digit after solving the previous operation
-    if (history.textContent.includes('=')) { clear(); }
+    if (history.textContent.includes('=') || (screen.textContent.includes('C'))) { clear(); }
 
     if (!(screen.textContent.includes('.') && text === '.') && screen.textContent.length < 15) { screen.textContent += text; }
 }
 
 function operatorPress(button) {
+    if (screen.textContent.includes('C')) {
+        clear();
+        return;
+    }
+
     if (history.textContent !== '' && !(history.textContent.includes('='))) { solve(); }
 
     if (typeof button === 'string') { op = button; }
@@ -52,6 +58,11 @@ function operatorPress(button) {
 }
 
 function solve() {
+    if (screen.textContent.includes('C')) {
+        clear();
+        return;
+    }
+
     if (!history.textContent.includes('=')) {
         b = Number(screen.textContent);
     }
